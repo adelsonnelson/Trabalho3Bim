@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div class="message">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form action="/contas/save" method="post">
+        <div>
+            <label for="nome">Sabor: </label>
+            <input type="text" name="sabor" id="sabor">
+        </div>
+        <div>
+            <label for="dist">Ingredientes: </label>
+            <input type="text" name="ingredientes" id="ingredientes">
+        </div>
+        <div>
+            <label for="sat">Preço: </label>
+            <input type="number" name="preço" id="preço">
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}
