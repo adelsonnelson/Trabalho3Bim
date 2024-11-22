@@ -9,20 +9,22 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div>
+    <div class="adicionar">
         <a href="/clientes/add">Adicionar</a>
     </div>
     <table>
         <tr>
             <th>Nome</th>
             <th>Email</th>
-            <th>Senha</th>
+            <th>Editar</th>
+            <th>Remover</th>
         </tr>
-        {% for u in dados %}
+        {% for c in dados %}
         <tr>
-            <td>{{u.nome}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.senha}}</td>
+            <td>{{c.nome}}</td>
+            <td>{{c.email}}</td>
+            <td><a href="/clientes/edit/{{c.id}}">[E]</a></td>
+            <td><a href="/clientes/remove/{{c.id}}">[R]</a></td>
         </tr>
         {% endfor %}
     </table>

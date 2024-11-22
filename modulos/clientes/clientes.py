@@ -17,16 +17,46 @@ def add():
 def save():
     nome = request.form.get('nome')
     email = request.form.get('email')
-    senha = request.form.get('senha')
     
-    if nome and email and senha:
-        objeto = Usuario(nome, email, senha)
+    if nome and email:
+        objeto = Cliente(nome, email)
         db.session.add(objeto)
         db.session.commit()
-        flash('Usuario salvo com sucesso!!!')
+        flash('Cliente salvo com sucesso!!!')
         return redirect('/clientes')
     else:
         flash("Preencha todos os campos!!!")
         return redirect('/clientes/add')
 
+@bp_cliente.route("/remove/<int:id>")
+def remove(id):
+    c = Cliente.query.get(id)
+    try:
+        db.session.delete(c)
+        db.session.commit()
+        flash("Cliente removido!!!")
+    except:
+        flash("Cliente Inválido!!!")
+    return redirect("/clientes")
 
+
+@bp_cliente.route("/edit/<int:id>")
+def edit(id):
+    c = Cliente.query.get(id)
+    return render_template("cliente_edit.html", dados=c)
+
+
+@bp_cliente.route("/edit-save", methods=['POST'])
+def edit_save():
+    nome = request.form.get("nome")
+    email = request.form.get("email")
+    id = request.form.get("id")
+    if nome and email and id:
+        c = Cliente.query.get(id)
+        c.nome = nome
+        c.email = email
+        db.session.commit()
+        flash("Dados atualizados!!!")
+    else:
+        flash("Preencha todos os campos!!!")
+    return redirect("/clientes")

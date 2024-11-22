@@ -8,7 +8,7 @@ from database import db
 from flask_migrate import Migrate
 db.init_app(app)
 migrate = Migrate(app, db)
-from models import Clientes, Contas
+from models import Cliente, Conta
 
 from modulos.clientes.clientes import bp_cliente
 app.register_blueprint(bp_cliente, url_prefix='/clientes')

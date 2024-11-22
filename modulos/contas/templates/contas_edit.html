@@ -9,14 +9,14 @@
             </div>
         {% endfor %}
     {% endif %}
-    <form action="/contas/save" method="post">
+    <form action="/contas/edit-save" method="post">
         <div>
             <label for="saldo">Saldo: </label>
-            <input type="number" name="saldo" id="saldo">
+            <input type="number" name="saldo" id="saldo" value="{{dados.saldo}}">
         </div>
         <div>
             <label for="tipo_conta">Tipo de Conta: </label>
-            <input type="text" name="tipo_conta" id="tipo_conta">
+            <input type="text" name="tipo_conta" id="tipo_conta" value="{{dados.tipo_conta}}">
         </div>
         <div>
             <label for="cliente">Cliente: </label>
@@ -27,6 +27,7 @@
                 {% endfor %}
             </select>
         </div>
+        <input type="hidden" name="id" id="id" value="{{dados.id}}">
         <button type="submit">Salvar</button>
     </form>
 {% endblock %}

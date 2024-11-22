@@ -6,7 +6,7 @@ class Cliente(db.Model):
     nome = db.Column(db.String(100))
     email = db.Column(db.String(50))
 
-    def __init__(self, nome, email, senha):
+    def __init__(self, nome, email):
         self.nome = nome
         self.email = email
 
@@ -19,18 +19,18 @@ class Conta(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     saldo = db.Column(db.Float)
     tipo_conta = db.Column(db.String(50))
-    cliente_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     
 
-    usuario = db.relationship('Usuario', foreign_keys = usuario_id)
+    cliente = db.relationship('Cliente', foreign_keys = cliente_id)
 
 
     
-    def __init__(self, sabor, ingredientes, preco):
-        self.sabor = sabor
-        self.ingredientes = ingredientes
-        self.preco = preco
+    def __init__(self, saldo, tipo_conta, cliente_id):
+        self.saldo = saldo
+        self.tipo_conta = tipo_conta
+        self.cliente_id = cliente_id
 
     def __repr__(self):
-        return "<Conta {}>".format(self.sabor)
+        return "<Conta {}>".format(self.saldo)
         
